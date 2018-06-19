@@ -46,9 +46,15 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public Rating update(Rating rating) {
-		logger.info("> create");
-		Rating newEntity = ratingRepository.save(rating);
-		logger.info("< create");
+		logger.info("> update");
+		Rating changeRating = ratingRepository.findById(rating.getId()).get();
+		changeRating.setAccommodation(rating.getAccommodation());
+		changeRating.setContent(rating.getContent());
+		changeRating.setGrade(rating.getGrade());
+		changeRating.setKorisnik(rating.getKorisnik());
+		changeRating.setRezervacija(rating.getRezervacija());
+		Rating newEntity =  ratingRepository.save(changeRating);
+		logger.info("< update");
 		return newEntity;
 	}
 
