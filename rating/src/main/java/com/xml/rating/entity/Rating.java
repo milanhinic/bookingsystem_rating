@@ -6,33 +6,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "rating")
 public class Rating {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "korisnik")
 	private Long korisnik;
-	
+
 	@Column(name = "rezervacija")
 	private Long rezervacija;
-	
+
 	@Column(name = "accommodation")
 	private Long accommodation;
-	
+
 	@Column(name = "grade")
 	private Long grade;
-	
+
 	@Column(name = "content")
 	private String content;
 
@@ -103,7 +98,5 @@ public class Rating {
 		return "Rating [id=" + id + ", korisnik=" + korisnik + ", rezervacija=" + rezervacija + ", accommodation="
 				+ accommodation + ", grade=" + grade + ", content=" + content + "]";
 	}
-
-
 
 }

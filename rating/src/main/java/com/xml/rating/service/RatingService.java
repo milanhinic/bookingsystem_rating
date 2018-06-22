@@ -3,19 +3,20 @@ package com.xml.rating.service;
 import java.util.List;
 
 import com.xml.rating.entity.Rating;
+import com.xml.rating.entity.RatingAvgGrade;
 
 public interface RatingService {
 
 	List<Rating> findAll();
 
 	List<Rating> findByAccommodationAndGrade(Long accommodation, Long grade);
-	
+
 	Rating findById(Long id);
-	
+
 	List<Rating> findByAccommodation(Long id);
-	
+
 	List<Rating> findByKorisnik(Long id);
-	
+
 	List<Rating> findByReservation(Long id);
 
 	Rating save(Rating rating);
@@ -27,5 +28,7 @@ public interface RatingService {
 	Long count();
 
 	List<Rating> findAll(Integer page, Integer size);
-	
+
+	List<RatingAvgGrade> sortByAvgGrade();
+
 }

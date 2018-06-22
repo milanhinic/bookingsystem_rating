@@ -10,16 +10,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.xml.rating.entity.Rating;
+import com.xml.rating.entity.RatingAvgGrade;
 import com.xml.rating.repository.RatingRepository;
 
 @Service
-public class RatingServiceImpl implements RatingService{
+public class RatingServiceImpl implements RatingService {
 
-private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	private RatingRepository ratingRepository;
-	
+
 	@Override
 	public List<Rating> findAll() {
 		logger.info("> findAll");
@@ -53,7 +54,7 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 		changeRating.setGrade(rating.getGrade());
 		changeRating.setKorisnik(rating.getKorisnik());
 		changeRating.setRezervacija(rating.getRezervacija());
-		Rating newEntity =  ratingRepository.save(changeRating);
+		Rating newEntity = ratingRepository.save(changeRating);
 		logger.info("< update");
 		return newEntity;
 	}
@@ -75,41 +76,51 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public List<Rating> findAll(Integer page, Integer size) {
-		logger.info("> count");
+		logger.info("> findAll");
 		Page<Rating> pages = ratingRepository.findAll(PageRequest.of(page, size));
 		List<Rating> entities = pages.getContent();
-		logger.info("< count");
+		logger.info("< findAll");
 		return entities;
 	}
 
 	@Override
 	public List<Rating> findByAccommodation(Long id) {
-		logger.info("> findById id:{}", id);
+		logger.info("> findByAccommodation id:{}", id);
 		List<Rating> entity = ratingRepository.getByAccommodation(id);
-		logger.info("< findById id:{}", id);
+		logger.info("< findByAccommodation id:{}", id);
 		return entity;
 	}
 
 	@Override
 	public List<Rating> findByKorisnik(Long id) {
-		logger.info("> findById id:{}", id);
+		logger.info("> findByKorisnik id:{}", id);
 		List<Rating> entity = ratingRepository.getByKorisnik(id);
-		logger.info("< findById id:{}", id);
+		logger.info("< findByKorisnik id:{}", id);
 		return entity;
 	}
 
 	@Override
 	public List<Rating> findByReservation(Long id) {
-		logger.info("> findById id:{}", id);
+		logger.info("> findByReservation id:{}", id);
 		List<Rating> entity = ratingRepository.getByRezervacija(id);
-		logger.info("< findById id:{}", id);
+		logger.info("< findByReservation id:{}", id);
 		return entity;
 	}
 
 	@Override
 	public List<Rating> findByAccommodationAndGrade(Long accommodation, Long grade) {
+		logger.info("> findByAccommodationAndGrade ");
 		List<Rating> entity = ratingRepository.findByAccommodationAndGrade(accommodation, grade);
+		logger.info("< findByAccommodationAndGrade");
 		return entity;
 	}
-	
+
+	@Override
+	public List<RatingAvgGrade> sortByAvgGrade() {
+		logger.info("> sortByAvgGrade ");
+		List<RatingAvgGrade> entity = ratingRepository.sortByAvgGrade();
+		logger.info("< sortByAvgGrade");
+		return entity;
+	}
+
 }
